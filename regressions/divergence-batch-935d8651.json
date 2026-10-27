@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R5: rmcp rechaza batches aun con la versión 2025-03-26 negociada (esa revisión los admite); mcp-server-rs los procesa / rmcp rejects batches even after negotiating 2025-03-26 (which allows them); mcp-server-rs processes them",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(init(2025-03-26),id=req)",
+      "batch[ok(text(\u0000),id=other),ok(tools(echo=true),id=other)]"
+    ],
+    "rmcp": [
+      "ok(init(2025-03-26),id=req)",
+      "err(-32600,id=absent)"
+    ]
+  },
+  "op": "batch",
+  "signature": "divergence|*|batch|mcp-server-rs=batch[..];rmcp=err(-32600,id=absent)",
+  "steps": [
+    {
+      "id": 1,
+      "op": "initialize",
+      "version": "2025-03-26"
+    },
+    {
+      "items": [
+        {
+          "id": 3,
+          "op": "tools-list"
+        },
+        {
+          "id": 4,
+          "op": "call-echo",
+          "text": "\u0000"
+        }
+      ],
+      "op": "batch"
+    }
+  ],
+  "target": null
+}

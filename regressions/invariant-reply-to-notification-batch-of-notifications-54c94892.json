@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "kind": "invariant:reply-to-notification",
+  "note": "R6: se responde con error a un batch hecho sólo de notificaciones (JSON-RPC 2.0 §4.1 y §6: no se responde nada). rmcp siempre; mcp-server-rs cuando no se negoció 2025-03-26 (dudoso: desde 2025-06-18 MCP ya no tiene batches) / an error is sent for a batch made only of notifications (JSON-RPC 2.0 §4.1 and §6: nothing must be returned). rmcp always; mcp-server-rs when 2025-03-26 was not negotiated (borderline: MCP dropped batches in 2025-06-18)",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32600,id=null)"
+    ],
+    "rmcp": [
+      "err(-32600,id=absent)"
+    ]
+  },
+  "op": "batch-of-notifications",
+  "signature": "invariant:reply-to-notification|rmcp|batch-of-notifications|rmcp=err(-32600,id=absent)",
+  "steps": [
+    {
+      "items": [
+        {
+          "op": "initialized"
+        }
+      ],
+      "op": "batch"
+    }
+  ],
+  "target": "rmcp"
+}

@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "kind": "hang",
+  "note": "R2: rmcp ignora en silencio una línea que no es JSON válido (sin -32700, `id: null`); el cliente espera para siempre / rmcp silently ignores a line that is not valid JSON (no -32700, `id: null`); the client waits forever",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32700,id=null)"
+    ],
+    "rmcp": [
+      "NO-REPLY"
+    ]
+  },
+  "op": "malformed-1",
+  "signature": "hang|rmcp|malformed-1|rmcp=NO-REPLY",
+  "steps": [
+    {
+      "op": "malformed",
+      "variant": 1
+    }
+  ],
+  "target": "rmcp"
+}

@@ -1,0 +1,28 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R9: con estado: después de un request stateless de 2026-07-28 como primer mensaje, un `ping` sin `_meta` da -32602 en rmcp y `{}` en mcp-server-rs / stateful: after a stateless 2026-07-28 request as the first message, a `ping` without `_meta` gets -32602 from rmcp and `{}` from mcp-server-rs",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(tools(echo=true),id=req)",
+      "ok(empty,id=req)"
+    ],
+    "rmcp": [
+      "ok(tools(echo=true),id=req)",
+      "err(-32602,id=req)"
+    ]
+  },
+  "op": "ping",
+  "signature": "divergence|*|ping|mcp-server-rs=ok(empty,id=req);rmcp=err(-32602,id=req)",
+  "steps": [
+    {
+      "id": 1,
+      "op": "modern-tools-list"
+    },
+    {
+      "id": 2,
+      "op": "ping"
+    }
+  ],
+  "target": null
+}

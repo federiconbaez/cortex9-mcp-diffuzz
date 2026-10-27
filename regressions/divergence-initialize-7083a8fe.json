@@ -1,0 +1,30 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R7: rmcp acepta un segundo `initialize` en la misma sesión y renegocia la versión; mcp-server-rs lo rechaza con -32600 / rmcp accepts a second `initialize` in the same session and renegotiates the version; mcp-server-rs rejects it with -32600",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(init(2025-03-26),id=req)",
+      "err(-32600,id=req)"
+    ],
+    "rmcp": [
+      "ok(init(2025-03-26),id=req)",
+      "ok(init(2025-11-25),id=req)"
+    ]
+  },
+  "op": "initialize",
+  "signature": "divergence|*|initialize|mcp-server-rs=err(-32600,id=req);rmcp=ok(init(2025-11-25),id=req)",
+  "steps": [
+    {
+      "id": 1,
+      "op": "initialize",
+      "version": "2025-03-26"
+    },
+    {
+      "id": 6,
+      "op": "initialize",
+      "version": "2025-11-25"
+    }
+  ],
+  "target": null
+}

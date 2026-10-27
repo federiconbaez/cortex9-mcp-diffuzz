@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R4: rmcp responde errores sin el miembro `id` (JSON-RPC 2.0 §5: REQUIRED, `null` si no se pudo detectar) / rmcp sends error replies without the `id` member (JSON-RPC 2.0 §5: REQUIRED, `null` if it could not be detected)",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32600,id=null)"
+    ],
+    "rmcp": [
+      "err(-32600,id=absent)"
+    ]
+  },
+  "op": "non-object-3",
+  "signature": "divergence|*|non-object-3|mcp-server-rs=err(-32600,id=null);rmcp=err(-32600,id=absent)",
+  "steps": [
+    {
+      "op": "non-object",
+      "variant": 3
+    }
+  ],
+  "target": null
+}

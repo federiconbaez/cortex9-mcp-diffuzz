@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R1: rmcp termina el proceso (exit 1) si el primer mensaje no es `initialize`: una notificación (`initialized`, `cancelled`, desconocida, `initialize` sin id) o una respuesta del cliente / rmcp exits (status 1) when the first message is not `initialize`: a notification (`initialized`, `cancelled`, unknown, id-less `initialize`) or a client response",
+  "observed": {
+    "mcp-server-rs": [
+      "silent"
+    ],
+    "rmcp": [
+      "EXITED"
+    ]
+  },
+  "op": "initialize-as-notification",
+  "signature": "divergence|*|initialize-as-notification|mcp-server-rs=silent;rmcp=EXITED",
+  "steps": [
+    {
+      "op": "initialize-as-notification"
+    }
+  ],
+  "target": null
+}

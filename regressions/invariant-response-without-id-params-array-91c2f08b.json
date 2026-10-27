@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "kind": "invariant:response-without-id",
+  "note": "R4: rmcp responde errores sin el miembro `id` (JSON-RPC 2.0 §5: REQUIRED, `null` si no se pudo detectar) / rmcp sends error replies without the `id` member (JSON-RPC 2.0 §5: REQUIRED, `null` if it could not be detected)",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32602,id=req)"
+    ],
+    "rmcp": [
+      "err(-32600,id=absent)"
+    ]
+  },
+  "op": "params-array",
+  "signature": "invariant:response-without-id|rmcp|params-array|rmcp=err(-32600,id=absent)",
+  "steps": [
+    {
+      "id": 6,
+      "op": "params-array"
+    }
+  ],
+  "target": "rmcp"
+}

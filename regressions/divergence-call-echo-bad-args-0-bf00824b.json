@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "C: códigos de error distintos donde la spec no fija uno: requests antes de `initialize` (-32600 en mcp-server-rs, -32602 en rmcp) y `params` como array (-32602 en mcp-server-rs, -32600 en rmcp). No se cuentan como bugs / different error codes where the spec does not fix one: requests before `initialize` (-32600 in mcp-server-rs, -32602 in rmcp) and `params` as an array (-32602 in mcp-server-rs, -32600 in rmcp). Not counted as bugs",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32600,id=req)"
+    ],
+    "rmcp": [
+      "err(-32602,id=req)"
+    ]
+  },
+  "op": "call-echo-bad-args-0",
+  "signature": "divergence|*|call-echo-bad-args-0|mcp-server-rs=err(-32600,id=req);rmcp=err(-32602,id=req)",
+  "steps": [
+    {
+      "id": 4,
+      "op": "call-echo-bad-args",
+      "variant": 0
+    }
+  ],
+  "target": null
+}

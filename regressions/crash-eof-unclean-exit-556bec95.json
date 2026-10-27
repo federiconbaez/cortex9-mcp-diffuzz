@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "kind": "crash",
+  "note": "R11: rmcp sale con código 1 si stdin se cierra (o sólo llega basura) antes de `initialize` / rmcp exits with status 1 if stdin closes (or only garbage arrives) before `initialize`",
+  "observed": {
+    "mcp-server-rs": [
+      "err(-32700,id=null)"
+    ],
+    "rmcp": [
+      "NO-REPLY"
+    ]
+  },
+  "op": "eof-unclean-exit",
+  "signature": "crash|rmcp|eof-unclean-exit|rmcp=exit(1)",
+  "steps": [
+    {
+      "op": "malformed",
+      "variant": 2
+    }
+  ],
+  "target": "rmcp"
+}

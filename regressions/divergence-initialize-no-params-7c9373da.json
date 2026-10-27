@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R10: un `initialize` sin params después de inicializar da -32601 (method not found) en rmcp y -32600 en mcp-server-rs / an `initialize` without params after initialization gets -32601 (method not found) from rmcp and -32600 from mcp-server-rs",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(init(2025-03-26),id=req)",
+      "err(-32600,id=req)"
+    ],
+    "rmcp": [
+      "ok(init(2025-03-26),id=req)",
+      "err(-32601,id=req)"
+    ]
+  },
+  "op": "initialize-no-params",
+  "signature": "divergence|*|initialize-no-params|mcp-server-rs=err(-32600,id=req);rmcp=err(-32601,id=req)",
+  "steps": [
+    {
+      "id": 1,
+      "op": "initialize",
+      "version": "2025-03-26"
+    },
+    {
+      "id": 1,
+      "op": "initialize-no-params"
+    }
+  ],
+  "target": null
+}

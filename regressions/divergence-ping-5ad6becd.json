@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "kind": "divergence",
+  "note": "R8: con estado: tras un segundo `initialize` que pide 2026-07-28, rmcp contesta `2025-11-25` pero pasa a comportarse como 2026-07-28 (`ping` da -32601 y `tools/list` sale con decoración stateless). Rompe \"respetar la versión negociada\" (MCP Lifecycle) / stateful: after a second `initialize` asking for 2026-07-28, rmcp answers `2025-11-25` but starts behaving as 2026-07-28 (`ping` returns -32601 and `tools/list` carries stateless decoration). Breaks \"respect the negotiated protocol version\" (MCP Lifecycle)",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(init(2025-11-25),id=req)",
+      "err(-32600,id=req)",
+      "ok(empty,id=req)"
+    ],
+    "rmcp": [
+      "ok(init(2025-11-25),id=req)",
+      "ok(init(2025-11-25),id=req)",
+      "err(-32601,id=req)"
+    ]
+  },
+  "op": "ping",
+  "signature": "divergence|*|ping|mcp-server-rs=ok(empty,id=req);rmcp=err(-32601,id=req)",
+  "steps": [
+    {
+      "id": 1,
+      "op": "initialize",
+      "version": "2025-11-25"
+    },
+    {
+      "id": 3,
+      "op": "initialize",
+      "version": "2026-07-28"
+    },
+    {
+      "id": 7,
+      "op": "ping"
+    }
+  ],
+  "target": null
+}

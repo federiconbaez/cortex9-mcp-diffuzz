@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "kind": "hang",
+  "note": "R3: rmcp descarta en silencio una línea de más de 16 MiB sin responder; mcp-server-rs no tiene límite y la responde / rmcp silently drops a line longer than 16 MiB without replying; mcp-server-rs has no limit and answers it",
+  "observed": {
+    "mcp-server-rs": [
+      "ok(empty,id=req)"
+    ],
+    "rmcp": [
+      "NO-REPLY"
+    ]
+  },
+  "op": "oversized",
+  "signature": "hang|rmcp|oversized|rmcp=NO-REPLY",
+  "steps": [
+    {
+      "bytes": 16777216,
+      "id": 2,
+      "op": "oversized"
+    }
+  ],
+  "target": "rmcp"
+}

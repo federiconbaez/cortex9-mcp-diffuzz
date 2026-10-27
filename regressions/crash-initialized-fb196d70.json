@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "kind": "crash",
+  "note": "R1: rmcp termina el proceso (exit 1) si el primer mensaje no es `initialize`: una notificación (`initialized`, `cancelled`, desconocida, `initialize` sin id) o una respuesta del cliente / rmcp exits (status 1) when the first message is not `initialize`: a notification (`initialized`, `cancelled`, unknown, id-less `initialize`) or a client response",
+  "observed": {
+    "mcp-server-rs": [
+      "silent"
+    ],
+    "rmcp": [
+      "EXITED"
+    ]
+  },
+  "op": "initialized",
+  "signature": "crash|rmcp|initialized|rmcp=EXITED",
+  "steps": [
+    {
+      "op": "initialized"
+    }
+  ],
+  "target": "rmcp"
+}
