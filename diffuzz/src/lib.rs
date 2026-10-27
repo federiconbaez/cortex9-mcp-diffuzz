@@ -3,7 +3,14 @@
 //!
 //! * [`step`]: message vocabulary (valid, malformed and out-of-order).
 //! * [`gen`]: stateful case generator.
+//! * [`target`]: child-process runner with timeouts.
+//! * [`norm`] / [`oracle`]: normalization, JSON-RPC 2.0 invariants and
+//!   cross-implementation disagreement.
 
+pub mod case;
 pub mod gen;
+pub mod norm;
+pub mod oracle;
 pub mod rng;
 pub mod step;
+pub mod target;
