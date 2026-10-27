@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    name: fmt · clippy · unit tests
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -D warnings
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Unit tests
+        run: cargo test --workspace --lib --bins --locked
+
+  regressions:
+    name: regression corpus vs mcp-server-rs + rmcp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build targets
+        run: |
+          scripts/build-targets.sh > targets.env
+          cat targets.env
+          sed 's/^export //' targets.env >> "$GITHUB_ENV"
+      - name: Replay corpus (fails if a target is missing)
+        run: cargo test -p mcp-diffuzz --test regressions --locked -- --nocapture
+      - name: Short fuzz campaign (seed 1, 40 cases)
+        run: |
+          target/release/mcp-diffuzz fuzz \
+            --target "mcp-server-rs=$DIFFUZZ_MCP_SERVER_RS" --target "rmcp=$DIFFUZZ_RMCP" \
+            --seed 1 --cases 40 --out fuzz-out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-out
+          path: fuzz-out
+          if-no-files-found: error
+
+  coverage:
+    name: coverage of mcp-server-rs (conformance vs diffuzz)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: llvm-tools
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Measure
+        run: scripts/coverage.sh 300 1 | tee coverage.md
+      - name: Summary
+        run: cat coverage.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: |
+            coverage.md
+            work/cov/*.json
+            work/cov/conformance.log
+          if-no-files-found: error
