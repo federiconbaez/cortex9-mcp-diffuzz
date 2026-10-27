@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
-members = ["diffuzz"]
+members = ["diffuzz", "targets/rmcp-echo"]
+exclude = ["work"]
 
 [workspace.package]
 edition = "2021"
