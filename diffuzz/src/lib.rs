@@ -6,9 +6,13 @@
 //! * [`target`]: child-process runner with timeouts.
 //! * [`norm`] / [`oracle`]: normalization, JSON-RPC 2.0 invariants and
 //!   cross-implementation disagreement.
+//! * [`minimize`]: delta debugging.
+//! * [`corpus`]: regression cases and the fuzzing loop.
 
 pub mod case;
+pub mod corpus;
 pub mod gen;
+pub mod minimize;
 pub mod norm;
 pub mod oracle;
 pub mod rng;
