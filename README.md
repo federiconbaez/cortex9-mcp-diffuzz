@@ -95,6 +95,8 @@ Comando: `scripts/coverage.sh 300 1`. Compila mcp-server-rs con `-C instrument-c
 | **core (jsonrpc+server+protocol+tools)** | 48.4% | 67.5% | 74.4% | 47.5% | 67.4% | 74.7% |
 | **all files** | 40.4% | 34.8% | 55.9% | 39.1% | 34.6% | 55.2% |
 
+La tabla es de la máquina de desarrollo; una segunda corrida ahí dio los mismos números. En el job `coverage` del CI (ubuntu-latest, [run 40807569495](https://github.com/federiconbaez/cortex9-mcp-diffuzz/actions/runs/40807569495)) el mismo comando dio, para el núcleo, 48.0 % / 67.0 % / 73.8 % de líneas (suite / diffuzz / unión) y, para todos los archivos, 40.2 % / 34.7 % / 55.7 %. La diferencia, de menos de un punto, viene de que la carga depende de timeouts.
+
 Cómo leer la tabla:
 - En el núcleo independiente del transporte (`jsonrpc.rs`, `server.rs`, `protocol.rs`, `tools.rs`), diffuzz solo cubre 67.5 % de líneas contra 48.4 % de la suite oficial (+19.1 puntos). Sumado a la suite llega a 74.4 % (+26.0 puntos sobre la suite sola). La meta de la idea era +20 puntos de cobertura de ramas, pero lo que se midió son líneas y regiones, no ramas.
 - En el total de archivos diffuzz solo queda **por debajo** de la suite (34.8 % contra 40.4 %), porque no toca el transporte HTTP. La comparación por archivo es la honesta.
@@ -224,6 +226,8 @@ Command: `scripts/coverage.sh 300 1`. It builds mcp-server-rs with `-C instrumen
 | transport/stdio.rs | 0.0% | 97.1% | 97.1% | 0.0% | 91.2% | 91.2% |
 | **core (jsonrpc+server+protocol+tools)** | 48.4% | 67.5% | 74.4% | 47.5% | 67.4% | 74.7% |
 | **all files** | 40.4% | 34.8% | 55.9% | 39.1% | 34.6% | 55.2% |
+
+The table comes from the development machine, where a second run gave the same numbers. In the CI `coverage` job (ubuntu-latest, [run 40807569495](https://github.com/federiconbaez/cortex9-mcp-diffuzz/actions/runs/40807569495)) the same command gave, for the core, 48.0 % / 67.0 % / 73.8 % line coverage (suite / diffuzz / union) and, for all files, 40.2 % / 34.7 % / 55.7 %. The gap, under one point, comes from the timeout-dependent workload.
 
 How to read the table:
 - On the transport-independent core (`jsonrpc.rs`, `server.rs`, `protocol.rs`, `tools.rs`), diffuzz alone covers 67.5 % of lines vs 48.4 % for the official suite (+19.1 points). Together with the suite it reaches 74.4 % (+26.0 points over the suite alone). The idea's goal was +20 points of branch coverage, but what was measured is lines and regions, not branches.
